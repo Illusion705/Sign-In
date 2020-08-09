@@ -111,6 +111,7 @@ def log_in(username):
 				print(commands[index1])
 				index1 += 1
 		elif command == "$sign_out":
+			print("You were successfully signed out.")
 			exit_cmd = True
 			sign_in_options()
 		else:
