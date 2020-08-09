@@ -1,5 +1,4 @@
-users = {
-}
+users = {}
 
 commands = [
 	"$help: Shows a list of commands.",
@@ -80,7 +79,7 @@ def create_account():
 		
 		if not username == "$back":
 			if input("Verify Password: ") == password:
-				verfied_password = True
+				verified_password = True
 			else:
 				print("The passwords didn't match up.")
 		else:
