@@ -99,12 +99,22 @@ def create_account():
 def log_in(username):
 	print("")
 	print("Welcome " + username + "! Use \"$help\" if you need a list of commands.")
-	command = input("Enter Command: ")
-	if command == "$help":
-		index1 = 0
-		while index1 < len(commands) - 1:
-			print(commands[index1])
-			index1 += 1
+	
+	exit_cmd = False
+	while not exit_cmd
+		print("")
+		command = input("Enter Command: ")
+		if command == "$help":
+			print("")
+			index1 = 0
+			while index1 < len(commands) - 1:
+				print(commands[index1])
+				index1 += 1
+		elif command == "$sign_out":
+			exit_cmd = True
+			sign_in_options()
+		else:
+			print("Invalid command.")
 			
 sign_in_options()
 			
