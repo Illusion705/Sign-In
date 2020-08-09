@@ -101,7 +101,7 @@ def log_in(username):
 	print("Welcome " + username + "! Use \"$help\" if you need a list of commands.")
 	
 	exit_cmd = False
-	while not exit_cmd
+	while not exit_cmd:
 		print("")
 		command = input("Enter Command: ")
 		if command == "$help":
