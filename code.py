@@ -36,18 +36,22 @@ def sign_in():
 
 		if not username == "$back":
 			password = input("Enter Password: ")
-
-			if username in users:
-				if users[username]["Password"] == password:
-					log_in(username)
-					sign_in_complete = True
+			
+			if not password == "$back":
+				if username in users:
+					if users[username]["Password"] == password:
+						log_in(username)
+						sign_in_complete = True
+					else:
+						print("The username or password is incorrect.")
 				else:
-					print("The username or password is incorrect.")
+					print("The username or password is incorrect.")	
 			else:
-				print("The username or password is incorrect.")	
+				sign_in_complete = True
+				sign_in_options()
 		else:
-			sign_in_options()
 			sign_in_complete = True
+			sign_in_options()
 			
 def create_account():
 	print("")
@@ -69,8 +73,8 @@ def create_account():
 			else:
 				print("This username already exists.")
 		else:
-			sign_in_options()
 			valid_username = True
+			sign_in_options()
 			return 0
 	
 	verified_password = False
@@ -83,15 +87,17 @@ def create_account():
 			else:
 				print("The passwords didn't match up.")
 		else:
-			sign_in_options()
 			verified_password = True
+			sign_in_options()
 			return 0
+
 	users[username] = {}
 	users[username]["Password"] = password
 	print("Your account was successfully created.")
 	sign_in_options()
 	
 def log_in(username):
+	print("")
 	print("Welcome " + username + "! Use \"$help\" if you need a list of commands.")
 	command = input("Enter Command: ")
 	if command == "$help":
