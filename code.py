@@ -1,6 +1,12 @@
-users = {
-			
-		}
+users = {}
+
+commands = [
+	"$help: Shows a list of commands.",
+	"$sign_out: Signs you out of your account.",
+	"$show_apps: Shows you your applications.",
+	"$download_app {app name}: Allows you to download applications to your account.",
+	"$open_app {app name}: Allows you to open an app."
+]
 
 def sign_in_options():
 	print("")
@@ -28,20 +34,24 @@ def sign_in():
 	while not sign_in_complete:
 		username = input("Enter Username: ")
 
-		if not username == "*back":
+		if not username == "$back":
 			password = input("Enter Password: ")
-
-			if username in users:
-				if users[username]["Password"] == password:
-					log_in()
-					sign_in_complete = True
+			
+			if not password == "$back":
+				if username in users:
+					if users[username]["Password"] == password:
+						log_in(username)
+						sign_in_complete = True
+					else:
+						print("The username or password is incorrect.")
 				else:
-					print("The username or password is incorrect.")
+					print("The username or password is incorrect.")	
 			else:
-				print("The username or password is incorrect.")	
+				sign_in_complete = True
+				sign_in_options()
 		else:
-			sign_in_options()
 			sign_in_complete = True
+			sign_in_options()
 			
 def create_account():
 	print("")
@@ -50,14 +60,62 @@ def create_account():
 	while not valid_username:
 		username = input("Select A Username: ")
 		
-		if not username == "*back":
+		if not username == "$back":
 			if not username in users:
-				pass
+				index1 = 0
+				while index1 < len(username) - 1:
+					if username[index1] in ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "_"]:
+						valid_username = True
+					else:
+						valid_username = False
+						index = len(username) - 1
+					index1 += 1
 			else:
 				print("This username already exists.")
 		else:
-			sign_in_options()
 			valid_username = True
+			sign_in_options()
+			return 0
 	
-def log_in():
-	pass
+	verified_password = False
+	while not verified_password:
+		password = input("Select A Password: ")
+		
+		if not username == "$back":
+			if input("Verify Password: ") == password:
+				verified_password = True
+			else:
+				print("The passwords didn't match up.")
+		else:
+			verified_password = True
+			sign_in_options()
+			return 0
+
+	users[username] = {}
+	users[username]["Password"] = password
+	print("Your account was successfully created.")
+	sign_in_options()
+	
+def log_in(username):
+	print("")
+	print("Welcome " + username + "! Use \"$help\" if you need a list of commands.")
+	
+	exit_cmd = False
+	while not exit_cmd:
+		print("")
+		command = input("Enter Command: ")
+		if command == "$help":
+			print("")
+			index1 = 0
+			while index1 < len(commands) - 1:
+				print(commands[index1])
+				index1 += 1
+		elif command == "$sign_out":
+			print("You were successfully signed out.")
+			exit_cmd = True
+			sign_in_options()
+		else:
+			print("Invalid command.")
+			
+sign_in_options()
+			
