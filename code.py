@@ -1,5 +1,7 @@
 users = {}
 
+applications = []
+
 commands = [
 	"$help: Shows a list of commands.",
 	"$sign_out: Signs you out of your account.",
@@ -68,7 +70,7 @@ def create_account():
 						valid_username = True
 					else:
 						valid_username = False
-						index = len(username) - 1
+						index1 = len(username) - 1
 					index1 += 1
 			else:
 				print("This username already exists.")
@@ -114,8 +116,18 @@ def log_in(username):
 			print("You were successfully signed out.")
 			exit_cmd = True
 			sign_in_options()
+			
+		elif command == "$show_apps":
+			if len(applications) > 0:
+				index2 = 0
+				print("")
+				while index2 < len(applications):
+					print(index2 + 1 + ": " + applications[index2])
+			else:
+				print("You don't have any applications.")
+		elif command[0:13] == "$download_app ":
+			download(command[14:])
 		else:
 			print("Invalid command.")
 			
 sign_in_options()
-			
